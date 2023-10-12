@@ -12,12 +12,16 @@ export default async function checkout({ lineItems }) {
     return stripePromise;
   };
 
-  const stripe = await getStripe();
+  try {
+    const stripe = await getStripe();
 
-  await stripe.redirectToCheckout({
-    lineItems,
-    mode: 'payment',
-    successUrl: `${window.location.origin}/Success`,
-    cancelUrl: window.location.origin,
-  });
+    await stripe.redirectToCheckout({
+      lineItems,
+      mode: 'payment',
+      successUrl: `${window.location.origin}/Success`,
+      cancelUrl: window.location.origin,
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
