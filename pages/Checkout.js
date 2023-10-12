@@ -1,7 +1,24 @@
-import React from 'react';
+import { loadStripe } from '@stripe/stripe-js';
 
-const Checkout = () => {
-  return <div>Checkout</div>;
-};
+export default async function checkout({ lineItems }) {
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+  console.log(apiKey); // Add this line for debugging
 
-export default Checkout;
+  let stripePromise = null;
+
+  const getStripe = () => {
+    if (!stripePromise) {
+      stripePromise = loadStripe(`${apiKey}`);
+    }
+    return stripePromise;
+  };
+
+  const stripe = await getStripe();
+
+  await stripe.redirectToCheckout({
+    lineItems,
+    mode: 'payment',
+    successUrl: `${window.location.origin}/Success`,
+    cancelUrl: window.location.origin,
+  });
+}

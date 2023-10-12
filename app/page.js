@@ -1,14 +1,28 @@
+'use client';
+
 import Image from 'next/image';
+import checkout from '../pages/Checkout.js';
 
 export default function Home() {
   return (
     <main className="flex  min-h-screen flex-col items-center justify-center p-24">
+      <header className="mb-32">
+        <h1 className="text-6xl font-bold text-center">Welcome to my store</h1>
+        <p className="mt-3 text-center text-gray-500">Buy my fruit</p>
+      </header>
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-2 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+        <button
+          onClick={() => {
+            checkout({
+              lineItems: [
+                {
+                  price: 'price_1O02SyKGX3ntx2l1yHNxyQrO',
+                  quantity: 1,
+                },
+              ],
+            });
+          }}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <div className="flex flex-col items-center justify-center m-5">
             <Image
@@ -19,13 +33,20 @@ export default function Home() {
             />
           </div>
           <p className={`text-center text-sm opacity-50`}>Buy my apple</p>
-        </a>
+        </button>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
+        <button
+          onClick={() => {
+            checkout({
+              lineItems: [
+                {
+                  price: 'price_1O02UBKGX3ntx2l167vLtK6c',
+                  quantity: 1,
+                },
+              ],
+            });
+          }}
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
         >
           <div className="flex flex-col items-center justify-center m-5">
             <Image
@@ -36,7 +57,7 @@ export default function Home() {
             />
           </div>
           <p className={`text-center text-sm opacity-50`}>Buy my orange</p>
-        </a>
+        </button>
       </div>
     </main>
   );
