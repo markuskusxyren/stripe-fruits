@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import checkout from '../pages/Checkout.js';
+import checkout from '../Checkout.js';
 
 export default function Home() {
   return (
